@@ -109,7 +109,18 @@ namespace Proceduralnie
             bool trafiono;
             do
             {
-                int y = WczytajPropozycję();
+                int y;
+                try
+                {
+                    y = WczytajPropozycję();
+                }
+                catch (ArgumentException)
+                {
+
+                    Console.WriteLine("Szkoda, że się poddajesz");
+                    return;
+                }
+                
                 trafiono = Ocena(x, y);
             }
             while (!trafiono);

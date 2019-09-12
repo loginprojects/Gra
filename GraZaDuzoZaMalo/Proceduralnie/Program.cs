@@ -16,6 +16,8 @@ namespace Proceduralnie
             Console.Clear();
             Console.WriteLine("Aplikacja Gra");
             Console.WriteLine("===========");
+            licznik = 0;
+            czas = Stopwatch.StartNew();
         }
 
         static int Losuj()
@@ -32,10 +34,16 @@ namespace Proceduralnie
         static int WczytajPropozycję()
         {
             int propozycja = 0;
-            Console.WriteLine("Podaj swoją propozycję: \n Wpisz 'koniec', aby zakończyć.");
-            string napis = Console.ReadLine();
+
             while (true)
             {
+                Console.WriteLine("Podaj swoją propozycję: \n Wpisz 'koniec', aby zakończyć.");
+                string napis = Console.ReadLine();
+                if (napis == "koniec")
+                {
+                    throw new ArgumentException("Poddaję się");
+                }
+                    
                 try                                  // obsługa błędów. Warto sprawdzić w dokumentacji funkcji (w tym przypadku 'int.Parse'), jakie wyjątki mogą wystąpić
                 {
                     propozycja = int.Parse(napis);
@@ -61,6 +69,7 @@ namespace Proceduralnie
                     Environment.Exit(1);        //gwatłowanie przerywam działanie programu
                 }
             }
+            licznik++;
             return propozycja;
         }
 
@@ -82,20 +91,32 @@ namespace Proceduralnie
             return false;
         }
 
+        static void Statystyki()
+        {
+            czas.Stop();
+            Console.WriteLine("Statystyki gry:");
+            Console.WriteLine($"Czas gry: {czas.Elapsed}");
+            Console.WriteLine($"Liczba ruchów: {licznik}");
+        }
+
+        static int licznik = 0;
+        static Stopwatch czas;
+
         static void Main(string[] args)
         {
             Start();
             int x = Losuj();
+            bool trafiono;
             do
             {
-
                 int y = WczytajPropozycję();
-
-                //oceń propozycję
-            } while (true);
+                trafiono = Ocena(x, y);
+            }
+            while (!trafiono);
+            Statystyki();
         }
 
 
-        
+
     }
 }

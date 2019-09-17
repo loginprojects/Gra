@@ -60,7 +60,7 @@ namespace GraLib
             StanGry = Stan.Poddana;
         }
 
-        int Wylosowana
+        public int Wylosowana
         {
             get
             {

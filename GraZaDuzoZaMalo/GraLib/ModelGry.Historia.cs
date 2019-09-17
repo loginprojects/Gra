@@ -12,9 +12,9 @@ namespace GraLib
         //klasa wewnętrzna (inner class)
         public class Ruch
         {
-            public DateTime Czas { get; private set }
-            public int Propozycja { get; private set }
-            public Odp Odpowiedz { get; private set }
+            public DateTime Czas { get; private set; }
+            public int Propozycja { get; private set; }
+            public Odp Odpowiedz { get; private set; }
 
 
             //Konstruktor
@@ -26,7 +26,7 @@ namespace GraLib
             }
 
             public override string ToString() => $"{Czas} {Propozycja} {Odpowiedz}";
-            
         }
+
     }
 }
